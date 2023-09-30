@@ -119,9 +119,10 @@ stripchart(datosMaquina2$peso,              # Data
            vertical = TRUE,   # Vertical mode
            
            add = TRUE)
-
 #basado en este boxplot voy a asumir que la maquina 1 es responsable
 #por las dificultades
+
+##### 3.c. probando cada combinacion de maquina y operario #####
 
 
 datosA1 <- datos[(datos$operario == 'A')& (datos$maquina == 1),]
@@ -133,7 +134,14 @@ boxplot(datosA1$peso,datosA2$peso,datosB1$peso,datosB2$peso,
         main="histograma del peso",
         ylab="peso(gr)",
         ylim=c(208,228),
-        col="#7FFF00")
+        col="#7FFF00",
+        outline=TRUE)
+stripchart(list(datosA1$peso, datosA2$peso, datosB1$peso, datosB2$peso),
+           method = "jitter",  # Adjust the method as per your preference
+           vertical = TRUE,
+           add = TRUE,
+           pch = 16,  # Set the point character (16 is a solid dot)
+           col = "red")
 abline(h=c(212,220,228),lty=2,lwd=2,col="red")
 #habiendo hecho las 4 combinaciones de maquinas y operadores, concluyo que
 #los resultados permanecen mas centrados cuando usamos la maquina 2
