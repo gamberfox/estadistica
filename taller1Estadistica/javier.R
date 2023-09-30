@@ -43,6 +43,14 @@ boxplot(datos$peso,
         ylim=c(208,228),
         col="#7FFF00")
 abline(h=c(212,220,228),lty=2,lwd=2,col="red")
+points(datos$peso, pch = 16, col = "blue", cex = 0.7)
+
+
+#estaba tratando de agregar los puntos al box plot
+#boxplot(c(1, 2, 3, 4, 5,5,5))
+#x <- c(1, 2, 3)
+#y <- c(3, 3, 1)
+#points(x,y, pch = 16, col = "red")
 
 
 
