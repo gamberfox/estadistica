@@ -64,6 +64,15 @@ points(datos$peso, pch = 16, col = "blue", cex = 0.7)
 mean(datos$peso)
 median(datos$peso)
 
+mean(datos[datos$operario == 'A',]$peso)
+mean(datos[datos$operario == 'B',]$peso)
+
+
+mean(datos[datos$maquina == 1,]$peso)
+median(datos[datos$maquina == 1,]$peso)
+
+mean(datos[datos$maquina == 2,]$peso)
+median(datos[datos$maquina == 2,]$peso)
 
 #### 3. tratando de encontrar porque esta fallando esto ####
 #trataremos las 4 combinaciones de de maquina con operador.
