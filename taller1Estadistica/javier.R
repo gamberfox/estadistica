@@ -43,6 +43,14 @@ boxplot(datos$peso,
         ylim=c(208,228),
         col="#7FFF00")
 abline(h=c(212,220,228),lty=2,lwd=2,col="red")
+# Points
+stripchart(datos$peso,              # Data
+           method = "jitter", # Random noise
+           pch = 19,          # Pch symbols
+           col = 4,           # Color of the symbol
+           vertical = TRUE,   # Vertical mode
+           add = TRUE)        # Add it over
+
 points(datos$peso, pch = 16, col = "blue", cex = 0.7)
 
 
@@ -81,13 +89,37 @@ abline(h=c(212,220,228),lty=2,lwd=2,col="red")
 ##### 3.b. revisando si alguno de las maquinas es responsable #####
 datosMaquina1<-datos[datos$maquina == 1,]
 datosMaquina2<-datos[datos$maquina == 2,]
-boxplot(datosMaquina1$peso,datosMaquina2$peso,
-        names=c("Maquina 1","Maquina 2"),
+par(mfrow = c(1, 2))
+boxplot(datosMaquina1$peso,
+        names=c("Maquina 1"),
         main="histograma del peso",
         ylab="peso(gr)",
         ylim=c(208,228),
         col="#7FFF00")
 abline(h=c(212,220,228),lty=2,lwd=2,col="red")
+# Points
+stripchart(c(datosMaquina1$peso,datosMaquina2$peso),              # Data
+           method = "jitter", # Random noise
+           pch = 19,          # Pch symbols
+           col = 3:4,           # Color of the symbol
+           vertical = TRUE,   # Vertical mode
+           add = TRUE)        # Add it over
+
+boxplot(datosMaquina2$peso,
+        names=c("Maquina 2"),
+        main="histograma del peso",
+        ylab="peso(gr)",
+        ylim=c(208,228),
+        col="#7FFF00")
+abline(h=c(212,220,228),lty=2,lwd=2,col="red")
+stripchart(datosMaquina2$peso,              # Data
+           method = "jitter", # Random noise
+           pch = 19,          # Pch symbols
+           col = 4,           # Color of the symbol
+           vertical = TRUE,   # Vertical mode
+           
+           add = TRUE)
+
 #basado en este boxplot voy a asumir que la maquina 1 es responsable
 #por las dificultades
 
