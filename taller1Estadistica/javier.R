@@ -3,8 +3,10 @@
 #-- Taller1                                          --# 
 #-- Asignatura: Probabilidad y Estadística           --#
 #-- Profesores: Ivan Mauricio Bermudez               --#
-#-- Profesores: Ivan Mauricio Bermudez               --# 
-#-- Profesores: Ivan Mauricio Bermudez               --# 
+#------------------------------------------------------#
+#               ESTUDIANTES:CODIGO
+#-- Javier Humberto Grijalba Camayo: 1743693         --# 
+#-- :              --# 
 #------------------------------------------------------#
 #y es la variable respuesta, y x es la variable explicativa
 #relaciones lineales,
