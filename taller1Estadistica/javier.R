@@ -59,6 +59,7 @@ datosOperadorA<-datos[datos$operario == 'A',]
 datosOperadorB<-datos[datos$operario == 'B',]
 
 boxplot(datosOperadorA$peso,datosOperadorB$peso,
+        names=c("Operador A","Operador B"),
         main="histograma del peso",
         ylab="peso(gr)",
         ylim=c(208,228),
@@ -71,6 +72,7 @@ abline(h=c(212,220,228),lty=2,lwd=2,col="red")
 datosMaquina1<-datos[datos$maquina == 1,]
 datosMaquina2<-datos[datos$maquina == 2,]
 boxplot(datosMaquina1$peso,datosMaquina2$peso,
+        names=c("Maquina 1","Maquina 2"),
         main="histograma del peso",
         ylab="peso(gr)",
         ylim=c(208,228),
