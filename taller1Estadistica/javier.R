@@ -21,7 +21,7 @@ names(datos) #nombres de las variables en la BD.
 str(datos)  #Indica el tipo de variable
 head(datos) #Muestra las primeras lineas de la BD.
 
-#### 2. Crear histograma ####
+#### 2.a. Crear histograma ####
 
 hist(datos$peso,
      main=paste("histograma del peso"),
@@ -34,7 +34,7 @@ hist(datos$peso,
 abline(v=c(212,220,228),lty=c(3,3,3),lwd=c(3,3,3),col="red")
 
 
-#### 2.b. Crear Boxplot ####
+###### 2.b. Crear Boxplot ######
 #boxplot(datos$peso) #generico
 #no hay medidad de frecuencia asi que omitimos xlab
 boxplot(datos$peso,
@@ -60,6 +60,9 @@ points(datos$peso, pch = 16, col = "blue", cex = 0.7)
 #y <- c(3, 3, 1)
 #points(x,y, pch = 16, col = "red")
 
+###### 2.c. indicadores de tendencia central ######
+mean(datos$peso)
+median(datos$peso)
 
 
 #### 3. tratando de encontrar porque esta fallando esto ####
