@@ -14,7 +14,8 @@
 
 
 #### 1. Lectura de datos ####
-
+#install.packages("table1")
+library(table1)
 datos <- read.table("data_embutidos.txt", header=TRUE, dec=".")
 
 names(datos) #nombres de las variables en la BD.
@@ -157,4 +158,11 @@ stripchart(list(datosA1$peso, datosA2$peso, datosB1$peso, datosB2$peso),
 abline(h=c(212,220,228),lty=2,lwd=2,col="red")
 #habiendo hecho las 4 combinaciones de maquinas y operadores, concluyo que
 #los resultados permanecen mas centrados cuando usamos la maquina 2
+tapply(datos$peso, datos$operario, mean)
 
+label(datos$operario) <- "operario"
+label(datos$maquina) <- "maquina"
+label(datos$dia) <- "dia"
+label(datos$peso) <- "peso"
+
+table1(~ maquina| operario,data=datos)
