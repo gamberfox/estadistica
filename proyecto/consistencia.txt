@@ -1,11 +1,14 @@
 # numerical rules
 age >= 0
 age <= 150
+per.hog >= 0
+HHD >= 0
+HHI >= 0
 
 # categorical rules
-genero %in% c("Femenino","Masculino")
-zona %in% c("Urbano","Rural")
-grado %in% c("Sexto","Septimo","Octavo","Noveno","Decimo","Once")
+genero %in% c(1,2)
+zona %in% c(1,2)
+grado %in% c(6,7,8,9,10,11)
 agegroup %in% c("child","adult","elderly")
 if ( status == "married" ) agegroup %in% c("adult","elderly")
 

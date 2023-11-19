@@ -47,16 +47,16 @@ table(data.completo$per.hog)
 
 # Declaración de niveles correctos para las variables tipo Factor
 
-level_genero <- c("1"="Femenino", femenino="Femenino", Femenino="Femenino", FEMENINO="Femenino", 
-                  "2" ="Masculino",masculino="Masculino",Masculino="Masculino",MASCULINO="Masculino")
-level_zona <- c("1"="Urbano",urbano="Urbano",Urbano="Urbano",URBANO="Urbano",
-                "2"="Rural",rural="Rural",Rural="Rural",RURAL="Rural")
-level_grado <- c("6"="Sexto",sexto="Sexto",SEXTO="Sexto",
-                 "7"="Septimo",septimo="Septimo",SEPTIMO="Septimo",
-                 "8"="Octavo",octavo="Octavo",OCTAVO="Octavo",
-                 "9"="Noveno",noveno="Noveno",NOVENO="Noveno",
-                 "10"="Decimo",decimo="Decimo",DECIMO="Decimo",
-                 "11"="Once",once="Once",ONCE="Once")
+level_genero <- c("1"="1", femenino="1", Femenino="1", FEMENINO="1", 
+                  "2" ="2",masculino="2",Masculino="2",MASCULINO="2")
+level_zona <- c("1"="1",urbano="1",Urbano="1",URBANO="1",
+                "2"="2",rural="2",Rural="2",RURAL="2")
+level_grado <- c("6"="6",sexto="6",SEXTO="6",
+                 "7"="7",septimo="7",SEPTIMO="7",
+                 "8"="8",octavo="8",OCTAVO="8",
+                 "9"="9",noveno="9",NOVENO="9",
+                 "10"="10",decimo="10",DECIMO="10",
+                 "11"="11",once="11",ONCE="11")
 level_comp_HHD <- c(Lavado.ropa="Lavado Ropa",
                     Riego.jardin="Riego Jardin",
                     Uso.baño="Uso baño",Uso_baño="Uso baño",USO.BAÑO="Uso baño",
