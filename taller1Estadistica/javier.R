@@ -102,6 +102,10 @@ abline(h=c(212,220,228),lty=2,lwd=2,col="red")
 ##### 3.b. revisando si alguno de las maquinas es responsable #####
 datosMaquina1<-datos[datos$maquina == 1,]
 datosMaquina2<-datos[datos$maquina == 2,]
+sd(datosMaquina1$peso)
+sd(datosMaquina2$peso)
+
+
 par(mfrow = c(1, 2))
 boxplot(datosMaquina1$peso,
         names=c("Maquina 1"),
@@ -142,6 +146,15 @@ datosA1 <- datos[(datos$operario == 'A')& (datos$maquina == 1),]
 datosA2 <- datos[(datos$operario == 'A')& (datos$maquina == 2),]
 datosB1 <- datos[(datos$operario == 'B')& (datos$maquina == 1),]
 datosB2 <- datos[(datos$operario == 'B')& (datos$maquina == 2),]
+min(datosA1$peso)
+max(datosA1$peso)
+mean(datosA1$peso)
+count(datosA1)
+nrow(datosA1)
+sd(datosA1$peso)
+sd(datosA2$peso)
+sd(datosB1$peso)
+sd(datosB2$peso)
 boxplot(datosA1$peso,datosA2$peso,datosB1$peso,datosB2$peso,
         names=c("A1","A2","B1","B2"),
         main="histograma del peso",
@@ -164,5 +177,20 @@ label(datos$operario) <- "operario"
 label(datos$maquina) <- "maquina"
 label(datos$dia) <- "dia"
 label(datos$peso) <- "peso"
-
+labels <- list(
+  dia = "Day",
+  operario = "Operator",
+  maquina = "Machine",
+  peso = "Weight"
+)
+attr(datos, "var.labels") <- labels
+my_table <- table1(
+  vars = c("dia", "operario", "maquina", "peso"),
+  data = datos
+)
 table1(~ maquina| operario,data=datos)
+table1(
+  data = datos,
+  labels=c("operario","maquina")
+)
+
