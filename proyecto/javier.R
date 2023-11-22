@@ -89,23 +89,111 @@ table(data$per.hog)
 #### 2. construyendo la hoja "consistencia.txt"     ####
 #---------------------------------------------------------------#
 
+visdat::vis_miss(data)
+
+# Verificación de las reglas sobres los datos
+Rules <- editrules::editfile("consistencia.txt")
+editrules::violatedEdits(Rules, data)
+
+valid_Data = editrules::violatedEdits(Rules, data)
+summary(Valid_Data)
+
+which(Valid_Data)
 #---------------------------------------------------------------#
 #### 3. aplicar las reglas de "consistencia.txt" sobre las hojas de datos     ####
 #---------------------------------------------------------------#
+
+# Carga del archivo de reglas de validación
+Rules <- editrules::editfile("consistencia.txt")
+
+# Conexión entre las  reglas
+windows()
+plot(Rules)
+
+# Verificación de las reglas sobres los datos
+editrules::violatedEdits(Rules, data)
+Valid_Data = editrules::violatedEdits(Rules, data)
+summary(Valid_Data)
+
+#Identificar que observaciones presentan violaciones a las reglas
+which(Valid_Data)
+matrix(data=1:55, 5, 11)
+
+
+# Visualización del diagnóstico
+windows()
+plot(Valid_Data)
+
+
 
 #---------------------------------------------------------------#
 #### 4. visualizar y representar los registros que presentan datos faltantes     ####
 #---------------------------------------------------------------#
 
+mean(data$HDD)#esto fallara
+sum(is.na(data$HHD), na.rm=TRUE)#el numero de datos faltantes de HHD
+sum(is.na(data$HHI), na.rm=TRUE)#el numero de datos faltantes de HHI
+sum(is.na(data$per.hog), na.rm=TRUE)#el numero de datos faltantes de per.hog
+summary(data)##otra forma de revisar los datos NA
+View(data)
+is.na(data)                                    # para cada elemento de Datos verifica si es NA
+x11()
+##### 4.1 grafica importante #####
+visdat::vis_miss(data)
+
+
+# Función que evalua e identifica los datos faltantes por variable e individuo.
+
+miss<-function(Datos,plot=T){  
+  n=nrow(Datos);p=ncol(Datos)
+  names.obs<-rownames(Datos)
+  
+  
+  nobs.comp=sum(complete.cases(Datos))         # Cuenta los registros completos
+  Obs.comp=which(complete.cases(Datos))        # Identifica los registros completos
+  nobs.miss = sum(!complete.cases(Datos))      # Identifica los registros con datos faltantes.
+  Obs.miss=which(!complete.cases(Datos))       # Identifica los registros con datos faltantes.
+  
+  Datos.NA<-is.na(Datos)
+  Var_Num<- sort(colSums(Datos.NA),decreasing=T)
+  Var_per<-round(Var_Num/n,3)
+  Obs_Num<-rowSums(Datos.NA)
+  names(Obs_Num)<-names.obs
+  Obs_Num<-sort(Obs_Num,decreasing=T)
+  Obs_per<-round(Obs_Num/p,3)
+  lista<-list(n.row = n, n.col = p,n.comp = nobs.comp,Obs.comp = Obs.comp,n.miss = nobs.miss,Obs.miss = Obs.miss, Var.n = Var_Num , Var.p = Var_per, Obs.n= Obs_Num, Obs.per= Obs_per)
+  
+  if(plot){
+    windows(height=10,width=15)
+    par(mfrow=c(1,2))
+    coord<-barplot(Var_per,plot=F)
+    barplot(Var_per,xaxt="n",horiz=T,yaxt="n",xlim=c(-0.2,1), ylim=c(0,max(coord)+1),main= "% datos faltantes por variable")
+    axis(2,at=coord,labels=names(Var_per), cex.axis=0.5,pos=0,las=2)
+    axis(1,seq(0,1,0.2),seq(0,1,0.2),pos=0)
+    
+    coord<-barplot(Obs_per,plot=F)
+    barplot(Obs_per,xaxt="n",horiz=T,yaxt="n",xlim=c(-0.2,1), ylim=c(0,max(coord)+1),main= "% datos faltantes por registro")
+    axis(2,at=coord,labels=names(Obs_per),cex.axis=0.5,pos=0,las=2)
+    axis(1,seq(0,1,0.2),seq(0,1,0.2))
+  }
+  return(invisible(lista))
+}
+
+##### 4.2 otra grafica importante ######
+Summary.NA = miss(data)
+
 #---------------------------------------------------------------#
-#### 5. construyendo la hoja "consistencia.txt"     ####
+#### 5. Sobre el conjunto de variables cuantitativas, realice un diagnóstico de datos atípicos.     ####
 #---------------------------------------------------------------#
 
 #---------------------------------------------------------------#
-#### 6. construyendo la hoja "consistencia.txt"     ####
+#### 6. Con los resultados de los puntos anteriores, usted dispone del listado con registros inconsistentes y con datos faltantes. Es necesario corregirlo.     ####
 #---------------------------------------------------------------#
 
+#imputar, quitar datos atipicos del original, imputar original, 
+
+
 #---------------------------------------------------------------#
-#### 7. construyendo la hoja "consistencia.txt"     ####
+#### 7. Genere un resumen de los cambios realizados en la hoja de datos. ReporteCambios.txt     ####
 #---------------------------------------------------------------#
 
