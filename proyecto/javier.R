@@ -227,7 +227,7 @@ windows(height=10,width=15); visdat::vis_miss(data_ImputR)
 #Visualizar.AQ(Datos_ImputR)
 
 x11()
-boxplot(Datos_ImputR$Ozone); abline(h=0,col="red")
+boxplot(data_ImputR$HHD); abline(h=0,col="red")
 
 ##### 4.2 otra grafica importante ######
 Summary.NA = miss(data)
@@ -243,12 +243,14 @@ Summary.NA = miss(data)
 #---------------------------------------------------------------#
 
 # Transformación de variables 
-str(data)
-dataImput = transform(data,                                                                          
-                  Month=factor(Month,levels=1:12,labels=month.abb),        # Conversión a formato fecha
-                  Day_of_week =factor(Day_of_week,levels=1:5,labels=c("Lunes","Martes","Miercoles","Jueves","Viernes")))
-str(dataImput)
-summary(dataImput)
+#str(data)
+#dataImput = transform(data,                                                                          
+#                  Month=factor(Month,levels=1:12,labels=month.abb),        # Conversión a formato fecha
+#                  Day_of_week =factor(Day_of_week,levels=1:5,labels=c("Lunes","Martes","Miercoles","Jueves","Viernes")))
+#str(dataImput)
+#summary(dataImput)
+
+
 # Identificación y visualización de outliers Univariados.
 # Iniciaremos con la Variable: HHI
 x11()
@@ -280,7 +282,7 @@ id_HHI=unname(which(CD>4*mean(CD)))
 
 
 windows()
-labels=1:nrow(data);labels[-HHI]="."
+labels=1:nrow(data_ImputR);labels[-HHI]="."
 plot(CD,pch=20);abline(h=4*mean(CD),col="red",ylab="Cooks_Distance")
 text(HHI,CD[HHI],HHI, col="red",pos=3,cex=0.8)
 #######################################
@@ -317,6 +319,7 @@ out_Cook = lapply(data_ImputR[,-c(1,3,4,8,9)],id.out.uni,method="Cook")
 
 
 ## Visualización de outliers multivariados
+################does this need fixing
 out.mult=function(Datos){
   n= nrow(Datos); p= ncol(Datos)
   Distance= mahalanobis(Datos,center=colMeans(Datos),cov=cov(Datos))
@@ -335,10 +338,53 @@ out.mult=function(Datos){
   return(list(Out_dist=id.dist,Out_LOF=id.LOF))
 }
 
-
+#ignoramos las columnas con datos cualitativos
 id_Out_mult=out.mult(data_ImputR[,-c(1,3,4,8,9)])
 id_Out_mult=out.mult(data_ImputR[, sapply(data_ImputR, is.numeric)])
 
+### Ahora vamos a automatizar la inspección de las variables
+
+#Visualizar
+windows()
+par(mfrow=c(1,5))
+lapply(data_ImputR[,-c(1,3,4,8,9)],boxplot,col="Blue")
+
+
+### Identificar los Datos Atipicos
+out_Stand = lapply(data_ImputR[,-c(1,3,4,8,9)],id.out.uni,method="Standarized")
+out_Tukey = lapply(data_ImputR[,-c(1,3,4,8,9)],id.out.uni,method="Tukey")
+out_Cook = lapply(data_ImputR[,-c(1,3,4,8,9)],id.out.uni,method="Cook")
+
+####### Identificación  multivariada de outliers
+Ozone.cor = cor(data_ImputR[,-c(1,3,4,8,9)],method="pearson")
+windows(height=10,width=15)
+x11()
+corrplot::corrplot(Ozone.cor , method = "ellipse",addCoef.col = "black",type="upper")
+
+windows(height=10,width=15)
+pairs(data_ImputR[,-c(1,3,4,8,9)],lower.panel = panel.smooth, pch = 15)
+
+
+## Visualización de outliers multivariados
+out.mult=function(Datos){
+  n= nrow(Datos); p= ncol(Datos)
+  Distance= mahalanobis(Datos,center=colMeans(Datos),cov=cov(Datos))
+  Limit= qchisq(0.01, lower.tail=F,df=p)
+  id.dist= which(Distance>Limit)
+  Score_LOF = DMwR2::lofactor(Datos[,-c(1,3,4,8,9)], k=5)
+  id.LOF <- order(Score_LOF, decreasing=T)[1:ceiling(0.01*n)]
+  
+  windows()
+  par(mfrow=c(2,1))
+  plot(Distance,pch=20,ylim=c(0,max(Distance)*1.2))
+  text(id.dist,Distance[id.dist],id.dist, col="red",pos=3,cex=0.8)
+  abline(h=Limit,col="red",lwd=2,lty=2)
+  plot(Score_LOF,pch=20,ylim=c(0,max(Score_LOF)*1.2))
+  text(id.LOF,Score_LOF[id.LOF],id.LOF, col="red",pos=3,cex=0.8)
+  return(list(Out_dist=id.dist,Out_LOF=id.LOF))
+}
+
+id_Out_mult=out.mult(data_ImputR[,-c(1,3,4,8,9)])
 #---------------------------------------------------------------#
 #### 7. Genere un resumen de los cambios realizados en la hoja de datos. ReporteCambios.txt     ####
 #---------------------------------------------------------------#
