@@ -88,7 +88,7 @@ solveButton.addEventListener('click', () => {
         console.log(answer);
         console.log(`expanded nodes: ${statSheet.expandedNodes}`);
         console.log(`node depth: ${statSheet.nodeDepth}`);
-        console.log(`time cost: ${statSheet.solutionCost} milliseconds`);
+        console.log(`time cost: ${statSheet.computeTime} milliseconds`);
         console.log(`solution cost: ${statSheet.solutionCost}`);
         
         reader.onerror = () => {
