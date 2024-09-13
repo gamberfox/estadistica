@@ -6,7 +6,7 @@
 const breadthSolver = () => {
     console.log(`start breadth solver`);
     let foundAnswer = false;
-    let currentNode = new MazePosition(vehiclePosition[0], vehiclePosition[1], VEHICLE, 1, false);
+    let currentNode = new MazePosition(vehiclePosition[0], vehiclePosition[1], VEHICLE, 0, false);
     let queue = [currentNode];
     while (queue.length > 0) {
         statSheet.expandedNodes += 1;

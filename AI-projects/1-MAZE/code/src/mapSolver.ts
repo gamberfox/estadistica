@@ -25,6 +25,10 @@ solveButton.addEventListener('click', () => {
         nutcrackerAudio.pause();
         nutcrackerAudio.currentTime = 2;
     }
+    if(!joySongAudio.paused){
+        joySongAudio.pause();
+        joySongAudio.currentTime=1;
+    }
     //nutcrackerAudio.play();
     if (file) {
         const reader = new FileReader(); // Create a new FileReader

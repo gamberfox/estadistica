@@ -103,5 +103,11 @@ class Robot {
             }
             await this.delay(this.difficulty);
         }
+        if (!nutcrackerAudio.paused) {
+            nutcrackerAudio.pause();
+            nutcrackerAudio.currentTime = 2;
+            joySongAudio.currentTime = 1;
+            joySongAudio.play();
+        }
     }
 }

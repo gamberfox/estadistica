@@ -17,6 +17,7 @@ const mapInfo = document.getElementById('mapInfo') as HTMLPreElement | null;
 const map=document.getElementById('grid') as HTMLElement;
 
 const nutcrackerAudio:HTMLAudioElement = document.getElementById('nutcracker') as HTMLAudioElement;
+const joySongAudio:HTMLAudioElement = document.getElementById('joySong') as HTMLAudioElement;
 
 
 //create map
@@ -82,6 +83,10 @@ drawButton.addEventListener('click',()=>{
         const reader = new FileReader();
         reader.onload = (e) => {
             //fileContent.textContent = e.target?.result as string; // Display the file content
+            if(!joySongAudio.paused){
+                joySongAudio.pause();
+                joySongAudio.currentTime=1;
+            }
             parseMap(e.target?.result as string);
             drawMap();
         };

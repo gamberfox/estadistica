@@ -12,6 +12,7 @@ const mapInfo = document.getElementById('mapInfo');
 //const answer=document.getElementById('mapInfo') as HTMLPreElement;
 const map = document.getElementById('grid');
 const nutcrackerAudio = document.getElementById('nutcracker');
+const joySongAudio = document.getElementById('joySong');
 //create map
 for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
@@ -60,6 +61,10 @@ drawButton.addEventListener('click', () => {
         const reader = new FileReader();
         reader.onload = (e) => {
             //fileContent.textContent = e.target?.result as string; // Display the file content
+            if (!joySongAudio.paused) {
+                joySongAudio.pause();
+                joySongAudio.currentTime = 1;
+            }
             parseMap(e.target?.result);
             drawMap();
         };

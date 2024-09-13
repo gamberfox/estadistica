@@ -6,6 +6,9 @@ const MEDIUM_TRAFFIC = 3;
 const HEAVY_TRAFFIC = 4;
 const PASSENGER = 5;
 const DESTINATION = 6;
+const EASY = 1000;
+const NORMAL = 500;
+const HARD = 100;
 let vehiclePosition;
 let passengerPosition;
 let destinationPosition;
@@ -60,7 +63,7 @@ const drawMap = () => {
                     //cell.classList.add('cell2');
                     cell.className = 'cell2';
                     vehiclePosition = [x, y];
-                    robot = new Robot(x - 1, y - 1, 10, 10, 100);
+                    robot = new Robot(x - 1, y - 1, 10, 10, NORMAL);
                     break;
                 case 3:
                     //cell.classList.add('cell3');

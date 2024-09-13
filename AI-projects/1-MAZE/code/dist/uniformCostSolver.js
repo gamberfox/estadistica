@@ -6,7 +6,7 @@
 const uniformCostSolver = () => {
     console.log(`start uniform cost solver`);
     let foundAnswer = false;
-    let currentNode = new MazePosition(vehiclePosition[0], vehiclePosition[1], VEHICLE, 1, false);
+    let currentNode = new MazePosition(vehiclePosition[0], vehiclePosition[1], VEHICLE, 0, false);
     let queue = [currentNode];
     while (queue.length > 0) {
         if (statSheet.expandedNodes > STOP_POINT) {
@@ -14,6 +14,7 @@ const uniformCostSolver = () => {
                 the limit has been reached`);
             break;
         }
+        statSheet.expandedNodes += 1;
         queue.sort((a, b) => a.travelCost - b.travelCost);
         currentNode = queue.shift();
         statSheet.nodeDepth = (statSheet.nodeDepth < currentNode.nodeDepth) ?
@@ -39,9 +40,9 @@ const uniformCostSolver = () => {
             }
             currentNode.rightChild.father = currentNode;
             currentNode.rightChild.pathToFather = LEFT;
-            statSheet.expandedNodes =
-                (currentNode.rightChild.nodeDepth > statSheet.expandedNodes) ?
-                    currentNode.rightChild.nodeDepth : statSheet.expandedNodes;
+            /* statSheet.nodeDepth=
+            (currentNode.rightChild.nodeDepth>statSheet.nodeDepth)?
+            currentNode.rightChild.nodeDepth : statSheet.nodeDepth; */
             currentNode.rightChild.travelCost =
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y][currentNode.x + 1]).toString()];
@@ -59,9 +60,9 @@ const uniformCostSolver = () => {
             }
             currentNode.upChild.father = currentNode;
             currentNode.upChild.pathToFather = DOWN;
-            statSheet.expandedNodes =
-                (currentNode.upChild.nodeDepth > statSheet.expandedNodes) ?
-                    currentNode.upChild.nodeDepth : statSheet.expandedNodes;
+            /* statSheet.nodeDepth=
+            (currentNode.upChild.nodeDepth>statSheet.nodeDepth)?
+            currentNode.upChild.nodeDepth : statSheet.nodeDepth; */
             currentNode.upChild.travelCost =
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y - 1][currentNode.x]).toString()];
@@ -79,9 +80,10 @@ const uniformCostSolver = () => {
             }
             currentNode.leftChild.father = currentNode;
             currentNode.leftChild.pathToFather = RIGHT;
-            statSheet.expandedNodes =
-                (currentNode.leftChild.nodeDepth > statSheet.expandedNodes) ?
-                    currentNode.leftChild.nodeDepth : statSheet.expandedNodes;
+            /* statSheet.nodeDepth=
+            (currentNode.leftChild.nodeDepth>statSheet.nodeDepth)?
+            currentNode.leftChild.nodeDepth : statSheet.nodeDepth;
+ */
             currentNode.leftChild.travelCost =
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y][currentNode.x - 1]).toString()];
@@ -99,9 +101,10 @@ const uniformCostSolver = () => {
             }
             currentNode.downChild.father = currentNode;
             currentNode.downChild.pathToFather = UP;
-            statSheet.expandedNodes =
-                (currentNode.downChild.nodeDepth > statSheet.expandedNodes) ?
-                    currentNode.downChild.nodeDepth : statSheet.expandedNodes;
+            /* statSheet.nodeDepth=
+            (currentNode.downChild.nodeDepth>statSheet.nodeDepth)?
+            currentNode.downChild.nodeDepth : statSheet.nodeDepth;
+ */
             currentNode.downChild.travelCost =
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y + 1][currentNode.x]).toString()];

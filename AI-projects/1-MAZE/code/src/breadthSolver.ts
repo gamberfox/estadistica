@@ -7,7 +7,7 @@
 const breadthSolver=():number[]=>{
     console.log(`start breadth solver`);
     let foundAnswer:boolean=false;
-    let currentNode:MazePosition=new MazePosition(vehiclePosition[0],vehiclePosition[1],VEHICLE,1,false);
+    let currentNode:MazePosition=new MazePosition(vehiclePosition[0],vehiclePosition[1],VEHICLE,0,false);
     let queue:MazePosition[]=[currentNode];
     while(queue.length>0){
         statSheet.expandedNodes+=1;
