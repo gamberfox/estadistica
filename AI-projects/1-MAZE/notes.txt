@@ -1,0 +1,20 @@
+
+
+######THOUGH PROCESS OF THE MAP SOLVER 1.
+-
+
+---we check if we can go into a position.
+
+---if we can go into the position, we add the path back to
+the beginning into that position
+---
+
+
+---DEFICIENCY: the robot will go back to the beginnning
+a lot if it doesn't know the whole map.
+
+---
+---
+
+
+

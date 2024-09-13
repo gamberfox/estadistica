@@ -1,0 +1,44 @@
+
+
+###################smart car
+
+
+-matriz 10x10
+
+-----3 tipos de trafico:
+-liviano:costo 1
+-medio: costo 4
+-pesado: costo 7
+
+----------
+-
+
+-a estrella.
+--------------------QUESTIONS
+-is it okay to use 2 trees
+
+
+#######################################################
+###########BUSQUEDA PREFERENTE POR AMPLITUD
+---completitud: SI HAY SOLUCION, LA ENCUENTRA
+-ciclos afectan completitud
+
+---complejidad temporal:O(b^d)
+
+---complejidad espacial:O(b^d)
+
+
+---solucion optima:
+
+
+#######################################################
+###########Busqueda de costo uniforme
+-se expande el nodo raiz
+-en cada nodo n del arbol se calcula el costo de la ruta g(n)
+
+-profundidad no importa
+-es completo
+
+
+
+
